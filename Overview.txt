@@ -1,0 +1,33 @@
+Okay this is going to be a choose your own adventure text based type thing.
+What is the overall object of the game?
+    Defeating an enemy?
+        Only if it is not based on anything in real life
+    Rescuing someone?
+        Rescuing Brian from an enemy?
+    Finding something?
+        The Ultimate Doctor
+        The Final Scalpel
+    Why not all three? Find an object to defeat an enemy in order to rescue Brian!
+        Akila must find the Final Scalpel and the Ultimate Scrub Top to defeat {something} in order to rescue Brian
+What is the story?
+Mild mannered Akila Blaze must go on a quest to find the sacred items in order to defeat the Evil General Anesthesia before she can suck the love
+out of Brian's heart and become God King of the world
+What will be the components?
+    Choose your own adventure, for sure
+    Will it be compiled?
+        This would be ideal I think, leaves room for customization
+    Will it be on a repeating three day cycle like in a time loop?
+        That would be awesome, but maybe too much
+    Multiple endings?
+        Also yes. Buut how to implement this?
+    Save System? 
+        If akila fails or dies, how to revert?
+    
+Act 1
+    Akila is working normally when they learn that Brian has been kidnapped by the Evil General Anesthesia to complete her evil plot.
+    To have any chance of defeating General Anesthesia, they must collect the Ultimate Scalpel, Final Case Study, and the Omega Scrub Top.
+    Only then will Akila stand a chance to challenge General Anesthesia atop Mt Sinai to rescue their love, Brian
+Act 2
+    Akila collects the items that they need
+Act 3
+    Akila challenges and defeats General Anesthesia
