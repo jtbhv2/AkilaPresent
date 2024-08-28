@@ -1,14 +1,18 @@
 
-
+sexAppeal = 100
 LUCK = 0
-redPager = True
+hasRedPager = True
 CONDFIDENCE = 10
 surgerySuccess = True
+hasUltimateScalpel = False
+hasOmegaCaseStudy = False
+hasFinalScrubTop = False
 def prologue():
-    
+    global CONDFIDENCE
     complication_handled = False
 
     print("Welcome! You are DOCTOR AKILA B BLAZE: Pediatric surgeon by day, fierce adventurer by night.")
+    print('You get very little sleep, what with all the surgery and adventuring.')
     print("Today, you only have one case! And it is a simple appendectomy.")
     print("Make the right choices to complete the surgery successfully. Good luck, DOCTOR BLAZE!")
 
@@ -76,11 +80,14 @@ def prologue():
             end_game("Incorrect choice or complication not handled properly. Inadequate care can lead to infections or other issues.")
 
     def finish():
+        global CONDFIDENCE
         if surgerySuccess:
-            print("\nCongratulations! The pediatric appendectomy was successful. Excellent job, Surgeon!")
+            print("\nCongratulations! The pediatric appendectomy was successful. You have gained CONFIDENCE. Excellent job, Surgeon!")
+            CONDFIDENCE += 1
         else:
-            print("\nThe surgery did not go well. Better luck next time.")
-        return surgerySuccess
+            print("\nThe surgery did not go well. You have lost CONFIDENCE. Better luck next time.")
+            CONDFIDENCE -= 1
+        return surgerySuccess, CONDFIDENCE
 
     def end_game(message):
         print(message)
@@ -89,31 +96,101 @@ def prologue():
     step_one()
     return surgerySuccess
 def actOne():
-    if surgerySuccess == True:
-        print('DOCTOR COLLEAGUE: Great job DOCTOR BLAZE. I have never seen such quick thinking before. Not once in my 23 years.')
-        CONDFIDENCE += 1
+    global CONDFIDENCE
+    global LUCK
 
-    else:
-        print('DOCTOR COLLEAGUE: It happens, DOCTOR BLAZE. We have all had off days. Shake it off! He then smacks you on the back way too hard.')
-        CONDFIDENCE -= 1
-    
-    print('After the surgery, your RED PAGER goes off')
-    print('You think: Oh no! not the RED PAGER! That is for personal emergencies only!')
-    while True:
-        choice = input('Do you RESPOND to the RED PAGE, or do you IGNORE?').strip().lower()
-        if choice == 'ignore':
-            return choice
-        elif choice == 'red page':
-            print('Very funny. Trying to take advantage of me like that. You know what? You are going to be punished for this. Now please pick something else.')
-            LUCK -= 1
-        if choice == 'respond':
-            return choice
-        else:
-            print('I do not understand. So I will ask again.')
-    if choice == 'ignore':
+    def redPage():
+        print('After the surgery, your RED PAGER goes off.')
+        print('You think: Oh no! Not the RED PAGER! That is for personal emergencies only!')
+        choice = input('Do you RESPOND to the RED PAGE, or do you IGNORE? ').strip().lower()
         
+        if choice == 'ignore':
+            actOneFailure()
+            return choice  
+        
+        elif choice == 'respond':
+            print('\nYou decide to respond to the RED PAGER. It turns out to be a genuine emergency.')
+            print('DOCTOR FRIEND: AKILA! Your wife BRIAN has been kidnapped!')
+            brianKidnapped()
+            return choice  # End the function if responding
+        
+        else:
+            print('I do not understand your choice. Please try again.')
+            return redPage()  # Recursive call to ask for valid input again
+    def brianKidnapped():
+        global CONDFIDENCE, LUCK
+        print('\nYour heart skips a beat. \nBrian...kidnapped??? NO!!! \nYou feel your CONFIDENCE drop')
+        CONDFIDENCE -= 1
+        print('On the other hand, BRIAN is smart and sexual AND drives his own car... \nHe might be okay on his own')
+        choice = input('Will you LEARN more about his situation, or will you TRUST that he can handle himself?').strip().lower()
+        if choice == 'learn':
+            plotOverview()
+            return
+        elif choice =='trust':
+            print(
+                'Unfortunately, BRIAN could not, as it turns out, handle himself.'
+                '\nBRIAN cannot do something so herioc without his AKK'
+                )
+            actOneFailure()
+            return
+        else:
+            print('For both of our sanity, pick one of the two choices you are killing me')
+            brianKidnapped()
+        pass
+    def plotOverview():
+        global CONDFIDENCE, LUCK, hasRedPager
+        print(
+            'DOCTOR FRIEND, you scream into your PAGER, TELL ME WHAT HAS HAPPENED TO MY WIFE'
+            '\nDOCTOR FRIEND: I have no idea how it happened! We were on the phone, he was telling me how much he loves you and then the line went dead!'
+            '\nYOU: *animal noises* '
+            '\nDOCTOR FRIEND: And then someone picked up the phone! it was GENERAL ANESTHESIA!'
+            '\nGENERAL ANESTHESIA??? NOOOOOO! She was supposed to have been killed during the SUTURE WARS!'
+            '\nYOU: DOCTOR FRIEND, you have always been a great friend and an alright doctor. How can I save my beloved?'
+            '\nDOCTOR FRIEND: AKILA! You must gather the pieces of the HEMOSTATIC ORDER and confront GENERAL ANESTHESIA in her lair atop MOUNT SINAI'
+            '\nYou drop your PAGER on the ground in shock. It rolls under a nearby gurney'
+                )
+        hasRedPager = False
+        print('The HEMOSTATIC ORDER, you think to yourself. Nobody has heard of these objects in millions of years.')
+        print('Pieces of untold power that could rescue any DAMSEL IN DISTRESS')
+        print('But, you think, GENERAL ANESTHESIA has always been just a weak old punkass with little legs. You could squat like ten times her bodyweight')
+        choice = input('Will you CONFRONT GENERAL ANESTHESIA now, or will you LEARN more about each object?').split().lower()
+        if choice == 'confront':
+            print('You sprint all out the 2 miles to MOUNT SINAI, then the 1 mile vertical climb.'
+                  '\nYou make it to the top in just under ten minutes, your third best time.'
+                  '\nYou see GENERAL ANESTHESIA floating over the unconscious body of BRIAN.'
+                  '\nBRIAN has an eight pack. He looks great, all covered in oil like that'
+                  '\nGENERAL ANESTHESIA is performing some kind of ritual over his body'
+                  '\nGENERAL ANESTHESIA, you yell, GIVE ME BACK MY WIFE!'
+                  '\nGENERAL ANESTHESIA: DOCTOR BLAZE, How can you hope to defeat me in my new form?'
+                  '\nI will imbibe all of the LOVE BRIAN has for you, and then this world will end!!!'
+                  '\nShe finishes her ritual, and BRIAN is now a husk. Still looks great though. Like a solid 8/10, even with no moisture in his body.'
+                  )
+            actOneFailure()
+            return
+        elif choice == 'learn':
+            pass #this is where you pick up next time
+        else:
+            print('Ugh. Please pick one of the two choices.')
+            plotOverview()
+            return
+
+        pass
+    def prepareOrNot():
+        pass
+    redPage()
+def actTwo():
+    pass
+def actThree():
+    pass
 def actOneFailure():
+    print('Unfortunately, your adventure has ended before it really got started.')
+    print('Later in the day, the world ends. You are not really sure why.')
+    print('During the apocalypse you die of dysentery.')
+def actTwoFailure():
+    pass
 
 
 prologue()
+print(CONDFIDENCE)
 print(surgerySuccess)
+actOne()
