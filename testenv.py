@@ -2,6 +2,7 @@ import random
 LUCK = 100
 CONFIDENCE = 10
 def finalBattle():
+    global CONFIDENCE
     generalHealth = random.randint(int(CONFIDENCE * 1.1), int(CONFIDENCE * 1.5))
     choices = ['SCALPEL','CASE STUDY','SCRUB TOP']
     outcomeMessages = {
@@ -13,24 +14,34 @@ def finalBattle():
     ('SCALPEL', 'CASE STUDY'): "Her CASE STUDY sends your SCALPEL into a footnote rescursion loop. Oof.",
     'tie': "You went for the same object! Both sides break into interpretive dance, leaving everyone extremely uncomfortable."
 }
-    playerChoice = input('What will you do? (SCALPEL, CASE STUDY, or SCRUB TOP?)').strip().upper()
-    if playerChoice not in choices:
-        print('Not a valid choice.')
-        return
-    luckCheck = random.random() + (LUCK / 100)
-    if luckCheck > 0.8:
-        generalChoice = choices[(choices.index(playerChoice)+ 2) % 3]
-        print('LUCK is on your side! The GENERAL chose poorly!')
-    elif luckCheck < 0.2:
-        generalChoice = choices[(choices.index(playerChoice)+ 1) % 3]
-        print('Bad LUCK! She saw this coming from a mile away!')
-    else:
-        generalChoice = random.choice(choices)
-    print(f'\nThe GENERAL chooses {generalChoice}!')
-    if playerChoice == generalChoice:
-        print(outcomeMessages['tie'])
-    elif (playerChoice, generalChoice) in outcomeMessages:
-        print(outcomeMessages[(playerChoice, generalChoice)])
-    else:
-        print(outcomeMessages[(generalChoice, playerChoice)])
+    while generalHealth > 0:
+        playerChoice = input('What will you do? (SCALPEL, CASE STUDY, or SCRUB TOP?)').strip().upper()
+        if playerChoice not in choices:
+            print('Not a valid choice.')
+            return
+        luckCheck = random.random() + (LUCK / 100)
+        if luckCheck > 0.8:
+            generalChoice = choices[(choices.index(playerChoice)+ 2) % 3]
+            print('LUCK is on your side! The GENERAL chose poorly!')
+        elif luckCheck < 0.2:
+            generalChoice = choices[(choices.index(playerChoice)+ 1) % 3]
+            print('Bad LUCK! She saw this coming from a mile away!')
+        else:
+            generalChoice = random.choice(choices)
+        print(f'\nThe GENERAL chooses {generalChoice}!')
+        if playerChoice == generalChoice:
+            print(outcomeMessages['tie'])
+        elif (playerChoice, generalChoice) in outcomeMessages: #win
+            print(outcomeMessages[(playerChoice, generalChoice)])
+            generalHealth -= 1
+            if generalHealth == 5:
+                print('GENERAL ANESTHESIA is starting to tire out! Keep it up DOCTOR BLAZE!!')
+            elif generalHealth <= 0:
+                print('GENERAL ANESTHESIA falls to her knees! She is DEFEAT!!!')
+        else: #lose 
+            print(outcomeMessages[(generalChoice, playerChoice)])
+            print('You lose CONFIDENCE!!')
+            CONFIDENCE -= 1
+            if CONFIDENCE <= 1:
+                actThreeFailure()
 finalBattle()

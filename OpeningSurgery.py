@@ -8,9 +8,10 @@ hasUltimateScalpel = False
 hasOmegaCaseStudy = False
 hasFinalScrubTop = False
 collectedArtifacts = 0
+secretVisited = False
 import random
 import time
-def slowPrint(text, delay=0.05):
+def slowPrint(text, delay=0.01):
     for char in text:
         print(char, end='', flush=True)
         time.sleep(delay)
@@ -19,19 +20,18 @@ def slowPrint(text, delay=0.05):
 def setVariable(name, value):
     globals()[name] = value
     if debugMode == True:
-        print(f'{name} updated to {value}')
+        slowPrint(f'{name} updated to {value}')
 def prologue():
     global CONFIDENCE
-    complication_handled = False
 
-    print("Welcome! You are DOCTOR AKILA B BLAZE: Pediatric surgeon by day, fierce adventurer by night.")
-    print('You get very little sleep, what with all the surgery and adventuring.')
-    print("Today, you only have one case! And it is a simple appendectomy.")
-    print("Make the right choices to complete the surgery successfully. Good luck, DOCTOR BLAZE!")
+    slowPrint("Welcome! You are DOCTOR AKILA B BLAZE: Pediatric surgeon by day, fierce adventurer by night.")
+    slowPrint('You get very little sleep, what with all the surgery and adventuring.')
+    slowPrint("Today, you only have one case! And it is a simple appendectomy.")
+    slowPrint("Make the right choices to complete the surgery successfully. Good luck, DOCTOR BLAZE!")
 
     def step_one():
         global surgerySuccess
-        print("\nStep 1: Preoperative Assessment.")
+        slowPrint("\nStep 1: Preoperative Assessment.")
         choice = input("Do you choose to perform a thorough physical exam and order a CT scan or only rely on physical exam findings? (CT scan/physical exam) ").strip().lower()
         if choice == "ct scan":
             step_two()
@@ -41,7 +41,7 @@ def prologue():
 
     def step_two():
         global surgerySuccess
-        print("\nStep 2: Anesthesia Preparation.")
+        slowPrint("\nStep 2: Anesthesia Preparation.")
         choice = input("Do you choose to use endotracheal intubation or laryngeal mask airway (LMA) for anesthesia? (intubation/LMA) ").strip().lower()
         if choice == "intubation":
             step_three()
@@ -51,7 +51,7 @@ def prologue():
 
     def step_three():
         global surgerySuccess
-        print("\nStep 3: Surgical Approach.")
+        slowPrint("\nStep 3: Surgical Approach.")
         choice = input("Do you opt for an open appendectomy or a laparoscopic approach? (open/laparoscopic) ").strip().lower()
         if choice == "laparoscopic":
             step_four()
@@ -60,8 +60,8 @@ def prologue():
             end_game("Incorrect choice. Open approach is less ideal for this case. Increased risk of complications.")
 
     def step_four():
-        global surgerySuccess, complication_handled
-        print("\nStep 4: Surgical Technique.")
+        global surgerySuccess
+        slowPrint("\nStep 4: Surgical Technique.")
         choice = input("During the surgery, do you use monopolar cautery or bipolar cautery for hemostasis? (monopolar/bipolar) ").strip().lower()
         if choice == "bipolar":
             step_complication()
@@ -70,13 +70,12 @@ def prologue():
             end_game("Incorrect choice. Monopolar cautery can lead to excessive bleeding. Surgery is at risk.")
 
     def step_complication():
-        global surgerySuccess, complication_handled
-        print("\nComplication: Unexpected Hemorrhage.")
-        print("While performing the procedure, you encounter unexpected hemorrhage due to bleeding from a small artery.")
+        global surgerySuccess
+        slowPrint("\nComplication: Unexpected Hemorrhage.")
+        slowPrint("While performing the procedure, you encounter unexpected hemorrhage due to bleeding from a small artery.")
         choice = input("Do you choose to use hemostatic clips or apply direct pressure and suture? (clips/direct pressure) ").strip().lower()
         
         if choice == "clips":
-            complication_handled = True
             step_five()
         else:
             surgerySuccess = False
@@ -84,9 +83,9 @@ def prologue():
 
     def step_five():
         global surgerySuccess
-        print("\nStep 5: Postoperative Care.")
+        slowPrint("\nStep 5: Postoperative Care.")
         choice = input("Do you choose to use a broad-spectrum antibiotic prophylaxis or only a single antibiotic specific to the likely pathogens? (broad-spectrum/single) ").strip().lower()
-        if choice == "broad-spectrum" and complication_handled:
+        if choice == "broad-spectrum":
             finish()
         else:
             surgerySuccess = False
@@ -95,16 +94,16 @@ def prologue():
     def finish():
         global CONFIDENCE
         if surgerySuccess:
-            print("\nCongratulations! The pediatric appendectomy was successful. You have gained CONFIDENCE. Excellent job, Surgeon!")
-            setVariable('CONFIDENCE', CONFIDENCE + 1)
+            slowPrint("\nCongratulations! The pediatric appendectomy was successful. You have gained CONFIDENCE. Excellent job, Surgeon!")
+            setVariable('CONFIDENCE', CONFIDENCE + 3)
         else:
-            print("\nThe surgery did not go well. You have lost CONFIDENCE. Better luck next time.")
-            setVariable('CONFIDENCE', CONFIDENCE - 1)
-        return surgerySuccess, CONFIDENCE
+            slowPrint("\nThe surgery did not go well. You have lost CONFIDENCE. Better luck next time.")
+            setVariable('CONFIDENCE', CONFIDENCE - 2)
+        actOne()
 
     def end_game(message):
         global surgerySuccess
-        print(message)
+        slowPrint(message)
         finish()
 
     step_one()
@@ -112,44 +111,44 @@ def prologue():
 def actOne():
     global CONFIDENCE, LUCK, hasRedPager
     def redPage():
-        print('After the surgery, your RED PAGER goes off.')
-        print('You think: Oh no! Not the RED PAGER! That is for personal emergencies only!')
+        slowPrint('After the surgery, your RED PAGER goes off.')
+        slowPrint('You think: Oh no! Not the RED PAGER! That is for personal emergencies only!')
         choice = input('Do you RESPOND to the RED PAGE, or do you IGNORE? ').strip().lower()
         
         if choice == 'ignore':
             actOneFailure()
         elif choice == 'respond':
-            print('\nYou decide to respond to the RED PAGER. It turns out to be a genuine emergency.')
-            print('DOCTOR FRIEND: AKILA! Your wife BRIAN has been kidnapped!')
+            slowPrint('\nYou decide to respond to the RED PAGER. It turns out to be a genuine emergency.')
+            slowPrint('DOCTOR FRIEND: AKILA! Your wife BRIAN has been kidnapped!')
             brianKidnapped()
             return choice  # End the function if responding
         
         else:
-            print('I do not understand your choice. Please try again.')
+            slowPrint('I do not understand your choice. Please try again.')
             return redPage()  # Recursive call to ask for valid input again
     def brianKidnapped():
         global CONFIDENCE, LUCK, hasRedPager
-        print('\nYour heart skips a beat. \nBrian...kidnapped??? NO!!! \nYou feel your CONFIDENCE drop')
+        slowPrint('\nYour heart skips a beat. \nBrian...kidnapped??? NO!!! \nYou feel your CONFIDENCE drop')
         setVariable('CONFIDENCE', CONFIDENCE - 1)
-        print('On the other hand, BRIAN is smart and sexual AND drives his own car... \nHe might be okay on his own')
+        slowPrint('On the other hand, BRIAN is smart and sexual AND drives his own car... \nHe might be okay on his own')
         choice = input('Will you LEARN more about his situation, or will you TRUST that he can handle himself?').strip().lower()
         if choice == 'learn':
             plotOverview()
             return
         elif choice =='trust':
-            print(
+            slowPrint(
                 'Unfortunately, BRIAN could not, as it turns out, handle himself.'
                 '\nBRIAN cannot do something so herioc without his AKK'
                 )
             actOneFailure()
             return
         else:
-            print('For both of our sanity, pick one of the two choices you are killing me')
+            slowPrint('For both of our sanity, pick one of the two choices you are killing me')
             brianKidnapped()
         pass
     def plotOverview():
         global CONFIDENCE, LUCK, hasRedPager
-        print(
+        slowPrint(
             '\nDOCTOR FRIEND, you scream into your PAGER, TELL ME WHAT HAS HAPPENED TO MY WIFE'
             '\nDOCTOR FRIEND: I have no idea how it happened! We were on the phone, he was telling me how much he loves you and then the line went dead!'
             '\nYOU: *animal noises* '
@@ -160,12 +159,12 @@ def actOne():
             '\nYou drop your PAGER on the ground in shock. It rolls under a nearby gurney'
                 )
         hasRedPager = False
-        print('The HEMOSTATIC ORDER, you think to yourself. Nobody has heard of these objects in millions of years.')
-        print('Pieces of untold power that could rescue any DAMSEL IN DISTRESS')
-        print('But, you think, GENERAL ANESTHESIA has always been just a weak old punkass with little legs. You could squat like ten times her bodyweight')
+        slowPrint('The HEMOSTATIC ORDER, you think to yourself. Nobody has heard of these objects in millions of years.')
+        slowPrint('Pieces of untold power that could rescue any DAMSEL IN DISTRESS')
+        slowPrint('But, you think, GENERAL ANESTHESIA has always been just a weak old punkass with little legs. You could squat like ten times her bodyweight')
         choice = input('Will you CONFRONT GENERAL ANESTHESIA now, or will you LEARN more about each object?').strip().lower()
         if choice == 'confront':
-            print('You sprint all out the 2 miles to MOUNT SINAI, then the 1 mile vertical climb.'
+            slowPrint('You sprint all out the 2 miles to MOUNT SINAI, then the 1 mile vertical climb.'
                   '\nYou make it to the top in just under ten minutes, your third best time.'
                   '\nYou see GENERAL ANESTHESIA floating over the unconscious body of BRIAN.'
                   '\nBRIAN has an eight pack. He looks great, all covered in oil like that'
@@ -178,7 +177,7 @@ def actOne():
             actOneFailure()
             return
         elif choice == 'learn':
-            print(
+            slowPrint(
                 'The HEMOSTATIC ORDER...'
                 '\nThe ULTIMATE SCALPEL. It is said that this scalpel is so perfect, it can perform any surgery in a single stroke.'
                 '\nThe OMEGA CASE STUDY. Any person who reads this will become the essence of knowledge of MEDICAL'
@@ -186,7 +185,7 @@ def actOne():
                 )
             prepareOrNot()
         else:
-            print('Ugh. Please pick one of the two choices.')
+            slowPrint('Ugh. Please pick one of the two choices.')
             plotOverview()
             return
 
@@ -194,46 +193,68 @@ def actOne():
     def prepareOrNot():
         global CONFIDENCE, LUCK, hasRedPager
         choice = input(
-            'DOCTOR BLAZE! You have your mission. Will you PREPARE for your quest,'
+            'DOCTOR BLAZE! You have your mission. \nWill you PREPARE for your quest,'
             '\nSTART your quest immediately,'
             '\nor SUCCUMB to despair?'
         ).strip().lower()
         if choice == 'prepare':
-            print('You strap yourself up with SCISSORS, MEDICAL SUPPLIES, and your RED PAGER that you had dropped')
+            slowPrint('You strap yourself up with SCISSORS, MEDICAL SUPPLIES, and your RED PAGER that you had dropped')
             hasRedPager = True
-            print('After preparing, you feel CONFIDENT as HELL')
+            slowPrint('After preparing, you feel CONFIDENT as HELL')
             setVariable('CONFIDENCE', CONFIDENCE + 2)
             return CONFIDENCE, LUCK, hasRedPager
         elif choice == 'start':
-            print('Oh, you are a cocky little thing. Take a point of CONFIDENCE.')
+            slowPrint('Oh, you are a cocky little thing. Take a point of CONFIDENCE.')
             setVariable('CONFIDENCE', CONFIDENCE + 1)
             setVariable('LUCK', LUCK + 1)
             return CONFIDENCE, LUCK, hasRedPager
-        elif choice == 'succumb':
+        elif choice == 'succumb' and secretVisited == False:
+            secretCity()
+        elif choice == 'succumb' and secretVisited == True:
+            slowPrint('You only get one, PEEPA. Let us not cheat. GAME OVER')
             actOneFailure()
         else:
-            print('Please pick a choice that is a real choice, not just some weird ass thing i hate you')
+            slowPrint('Please pick a choice that is a real choice, not just some weird ass thing i hate you')
             prepareOrNot()
 
     redPage()
     actTwo()
+def secretCity():
+    global secretVisited, CONFIDENCE, LUCK, sexAppeal
+    secretVisited = True
+    slowPrint('The world goes WHITE. REAL LIFE BRIAN appears in front of you:'
+            '\nOh peepee... I really hope you chose that as a joke, and not because you feel despair.'
+            '\nI know things can be hard sometimes, but I hope you know that I will ALWAYS believe in you.'
+            '\nBecause BRAKILA always okay :)'
+            '\nI am prepared to spend my life with you, because I love you just that much. We are a team.'
+            '\nNow LIFT your GOT DAMN head up, and kick this fucking games ASS.'
+            '\nYou feel down sometimes, THEN LET BRIAN HELP!!!'
+            '\nTIME is rewinding to earlier today. That PEP talk really blew some FIRE up your ASS.'
+            '\nREAL LIFE BRIAN is giving you some love.'
+            '\nCONFIDENCE updated to 100'
+            '\nLUCK updated to 100'
+            '\nSEX APPEAL updated to 1000',.1) 
+    CONFIDENCE = 100
+    LUCK = 100
+    sexAppeal = 1000
+    prologue() 
 def actTwo(): #i just finished the scalpel chellenge, did some light testing, things look good. need to do both scrub top and case study
     global hasFinalScrubTop, hasOmegaCaseStudy, hasUltimateScalpel, hasRedPager
     global collectedArtifacts
-    print('After 30 YEARS inside the time dialation chamber, you are ready to begin your quest')
+    slowPrint('After 30 YEARS inside the time dialation chamber, you are ready to begin your quest')
     def journeyChecker():
         global hasFinalScrubTop, hasOmegaCaseStudy, hasUltimateScalpel, hasRedPager  
         if collectedArtifacts ==0:
-            print('Your journey is just beginning, with no artifacts in hand')
+            slowPrint('Your journey is just beginning, with no artifacts in hand')
             artifactPick()
         elif collectedArtifacts ==1:
-            print('With one artifact in hand, shit is about to get real')
+            slowPrint('With one artifact in hand, shit is about to get real')
             artifactPick()
         elif collectedArtifacts ==2:
-            print('Things will be much harder for you now that you have only one more to collect')
+            slowPrint('Things will be much harder for you now that you have only one more to collect')
             artifactPick()
         else:
-            print('You have collected all artifacts. Lets get nasty')
+            slowPrint('You have collected all artifacts. Lets get nasty')
             actThree()
             exit()
         choice = input('Which artifact will you persue? SCALPEL, SCRUB TOP, or CASE STUDY?').strip().lower()
@@ -249,16 +270,16 @@ def actTwo(): #i just finished the scalpel chellenge, did some light testing, th
         elif choice == 'case study' and hasOmegaCaseStudy == False:
             caseStudyChallenge()
         else:
-            print('Please pick a valid CHOICE you BASTARD MAN you are going to cause a STACK OVERFLOW if you keep getting these wrong!')
+            slowPrint('Please pick a valid CHOICE you BASTARD MAN you are going to cause a STACK OVERFLOW if you keep getting these wrong!')
             artifactPick()
     def scalpelChallenge():
         global hasUltimateScalpel, hasRedPager
-        print('\nDOCTOR BLAZE! During your studies, you discover the location of the Ultimate Scalpel'
+        slowPrint('\nDOCTOR BLAZE! During your studies, you discover the location of the Ultimate Scalpel'
               '\nYou make your way to the ANCIENT FELLOW SHIP, a GHOST SHIP haunted by RESIDENTS who never became FELLOWS'
               '\nDOCTOR BLAZE! You do not belong here and the GHOSTS can TELL'
               )
         if hasRedPager == True:
-            print('\nYour RED PAGER goes off'
+            slowPrint('\nYour RED PAGER goes off'
                   '\nDOCTOR FRIEND: AKILA! They know you do not belong here. They want you gone! if they attack, you must DODGE and then ATTACK!'
                   '\nYour RED PAGER goes silent. Good thing you picked it up! Your LUCK increases!'
                   )
@@ -267,66 +288,67 @@ def actTwo(): #i just finished the scalpel chellenge, did some light testing, th
             import random
             global CONFIDENCE, LUCK, hasUltimateScalpel, collectedArtifacts
             ghosts = ((collectedArtifacts * 2) + 5)
-            print(f'\nThe GHOSTS ATTACK! There are {ghosts} of them!')
+            slowPrint(f'\nThe GHOSTS ATTACK! There are {ghosts} of them!')
             while ghosts > 0:
                 if CONFIDENCE <= 0:
                     actTwoFailure()
                     return
-                print(f'\nYou face {ghosts} ghost(s)!')
+                slowPrint(f'\nYou face {ghosts} ghost(s)!')
                 ghostAction = random.choice(['ATTACK', 'HOVER SPOOKILY'])
                 if ghostAction == 'ATTACK':
-                    print('\nThe ghost attacks!')
+                    slowPrint('\nThe ghost attacks!')
                     playerChoice = input('\nWill you ATTACK or will you DODGE?').strip().lower()
                     if playerChoice == 'attack':
                         attackTry = (random.random()) + (LUCK / 10)
                         if attackTry >= 2:
-                            print('\nSuccess! You have defeated a ghost!')
+                            slowPrint('\nSuccess! You have defeated a ghost!')
                             ghosts -= 1
                         else:
-                            print('\nOh no! Your attack missed. Your CONFIDENCE drops!')
+                            slowPrint('\nOh no! Your attack missed. Your CONFIDENCE drops!')
                             setVariable('CONFIDENCE', CONFIDENCE - 1)
                     elif playerChoice == 'dodge':
-                        print('\nYou DODGED that bitch! You feel your CONFIDENCE increase!')
+                        slowPrint('\nYou DODGED that bitch! You feel your CONFIDENCE increase!')
                         setVariable('CONFIDENCE', CONFIDENCE + 1)
                         if hasRedPager == True:
-                            print('\nYou learned the secrets of this GHOST BITCH!'
+                            slowPrint('\nYou learned the secrets of this GHOST BITCH!'
                                   '\nYou COUNTERATTACK and defeat a ghost!')
                             ghosts -= 1
+                            continue
                         else:
-                            return
+                            continue
                     else:
-                        print('AKILA! I love you but you need to pick a real thing')
+                        slowPrint('AKILA! I love you but you need to pick a real thing')
                 else:
-                    print('\nThe ghosts HOVERS SPOOKILY'
+                    slowPrint('\nThe ghosts HOVERS SPOOKILY'
                           '\nDoes that mean it is safe to attack?')
                     playerChoice = input('\nWill you ATTACK or will you WAIT?').strip().lower()
                     if playerChoice == 'attack':
                         attackTry = (random.random()) + (LUCK / 10)
                         if attackTry >= .5:
-                            print('\nSuccess! You have defeated a ghost!')
+                            slowPrint('\nSuccess! You have defeated a ghost!')
                             ghosts -= 1
                         else:
-                            print('\nOh no! Your attack missed. Your CONFIDENCE drops!')
+                            slowPrint('\nOh no! Your attack missed. Your CONFIDENCE drops!')
                             setVariable('CONFIDENCE', CONFIDENCE - 1)
                     else:
-                        print('Like a SEXUAL TIGER, you wait for an opening')  
+                        slowPrint('Like a SEXUAL TIGER, you wait for an opening')  
             hasUltimateScalpel = True
-            print('\nYou have defeated all of the ghosts on the FELLOW SHIP!\nThe ULTIMATE SCALPEL is yours!')
+            slowPrint('\nYou have defeated all of the ghosts on the FELLOW SHIP!\nThe ULTIMATE SCALPEL is yours!')
             collectedArtifacts += 1
         ghostFight()
         journeyChecker()
     def scrubTopChallenge():
         global CONFIDENCE, LUCK, collectedArtifacts, hasFinalScrubTop
-        print('\nYou have divinationed the location of the Final Scrub Top'
+        slowPrint('\nYou have divinationed the location of the Final Scrub Top'
         '\nYou find yourself knee-deep in the PRIMORDIAL LAUNDERING SERVICE'
         '\nBLOODY HELL, you think to yourself, This place is BEAUTIFUL'
         '\nYou look around, and see only BEAUTY. But you FEEL very SUSPICIOUS')
         if hasRedPager == True:
-            print('\nYour RED PAGER goes off!'
+            slowPrint('\nYour RED PAGER goes off!'
                   '\nDOCTOR FRIEND: DOCTOR BLAZE! You must not trust your senses! \nThis is a CURSED PLACE!'
                   '\nYou must go AGAINST your instincts!'
                   '\nYour RED PAGER goes silent.')
-        print('\nYou hear the INTERCOM bing its BONG'
+        slowPrint('\nYou hear the INTERCOM bing its BONG'
               '\nOh no, you think. That means it is time for CLINIC')
         patientsToSee = (5+(collectedArtifacts*2))
         triviaQuestions = [
@@ -408,16 +430,16 @@ def actTwo(): #i just finished the scalpel chellenge, did some light testing, th
         questionsAsked = 0
         correctAnswers = 0 
         while patientsToSee > 0:
-            print(f'\nDOCTOR SEXY! You have {patientsToSee} more patients to see today!')
+            slowPrint(f'\nDOCTOR SEXY! You have {patientsToSee} more patients to see today!')
             question = random.choice(triviaQuestions)
-            print("\n" + question["question"])
-            print(f"Options: {question['choices'][0]} or {question['choices'][1]}")
+            slowPrint("\n" + question["question"])
+            slowPrint(f"Options: {question['choices'][0]} or {question['choices'][1]}")
             userAnswer = input("Your answer: ").strip().lower()
             if userAnswer == question['answer']:
-                print('Correct! Grind them down')
+                slowPrint('Correct! Grind them down')
                 correctAnswers += 1
             else:
-                print('Wrong! That little bastard looks better now. Your CONFIDENCE takes a hit!')
+                slowPrint('Wrong! That little bastard looks better now. Your CONFIDENCE takes a hit!')
                 setVariable('CONFIDENCE', CONFIDENCE - 1)
                 if CONFIDENCE <= 0:
                     actTwoFailure()
@@ -426,10 +448,10 @@ def actTwo(): #i just finished the scalpel chellenge, did some light testing, th
             questionsAsked += 1
             triviaQuestions.remove(question)
         if questionsAsked == correctAnswers:
-            print('Hot DOG! You got them all correct! You feel your CONFIDENCE and LUCK surge!')
+            slowPrint('Hot DOG! You got them all correct! You feel your CONFIDENCE and LUCK surge!')
             setVariable('LUCK', LUCK + 4)
             setVariable('CONFIDENCE', CONFIDENCE + 4)
-        print('\nAfter your last patient leaves, you realize that you have summoned the FINAL SCRUB TOP!!!'
+        slowPrint('\nAfter your last patient leaves, you realize that you have summoned the FINAL SCRUB TOP!!!'
               '\nYou feel TERRIBLE about what you had to do to those poor patients! You lost some LUCK!')
         setVariable('LUCK', LUCK - 1)
         hasFinalScrubTop = True
@@ -437,23 +459,23 @@ def actTwo(): #i just finished the scalpel chellenge, did some light testing, th
         journeyChecker()
     def caseStudyChallenge():
         global CONFIDENCE, LUCK, hasOmegaCaseStudy, collectedArtifacts
-        print('\nAfter journeying for thousands of years, you come upon the LAIR of the OMEGA CASE STUDY'
+        slowPrint('\nAfter journeying for thousands of years, you come upon the LAIR of the OMEGA CASE STUDY'
               '\nIt simply sits there, on its IVORY PEDESTAL'
               '\nYou could take it, you think. You could take it and move on from this realm'
               '\nBUT, as you look around, you fail to find any peer reviewed documentation on this CASE STUDY'
-              '\nYou could try to review it yourself, but that will probably be a whole thing.')
+              '\nYou could try to review it yourself, but that will probably be a WHOLE THING.')
         choice = input('Will you TAKE the OMEGA CASE STUDY? Or will you PEER review it yourself?').strip().lower()
         if choice == 'take':
-            print('\nYou FIRMLY GRASP the CASE STUDY in your greasy little claws'
+            slowPrint('\nYou FIRMLY GRASP the CASE STUDY in your greasy little claws'
                   '\nKnowing the data within is not reviewed gives you the JIBBLIES. You took the EASY WAY OUT')
             setVariable('LUCK', LUCK - 5)
             CONFIDENCE = 1
-            print('CONFIDENCE updated to 1')
+            slowPrint('CONFIDENCE updated to 1')
             hasOmegaCaseStudy = True
             collectedArtifacts += 1
         elif choice == 'peer':
             if hasRedPager == True:
-                print('\nYour RED PAGER goes off!'
+                slowPrint('\nYour RED PAGER goes off!'
                       '\nAKILA! This CASE STUDY is beyond the minds of MORTALS! You will need much LUCK for this!'
                       '\nYour RED PAGER goes silent.')
             questions = [
@@ -521,17 +543,17 @@ def actTwo(): #i just finished the scalpel chellenge, did some light testing, th
                 question_idx = 0  # Start with the first question
                 while correct_answers < correct_answers_needed and question_idx < len(selected_questions):
                     question = selected_questions[question_idx]
-                    print(question["question"])
-                    print("Possible answers:")
+                    slowPrint(question["question"])
+                    slowPrint("Possible answers:")
                     for idx, answer in enumerate(question["answers"], 1):
-                        print(f"{answer}")
+                        slowPrint(f"{answer}")
 
                     # Get player's answer
                     player_answer = input("Your answer (1 or 2): ").strip()
 
                     # Adjust the difficulty based on luck
                     if random.random() < (LUCK / 10):  # The higher the luck, the easier the question
-                        print("\nThe question feels easier, luck is on your side!\n")
+                        slowPrint("\nThe question feels easier, luck is on your side!\n")
                         correct_answer = player_answer
                     else:
                         correct_answer = random.choice([answer for answer in question["answers"] if answer != question["correct_answer"]])
@@ -539,10 +561,10 @@ def actTwo(): #i just finished the scalpel chellenge, did some light testing, th
                     # Check if the answer is correct
                     if player_answer == correct_answer:
                         correct_answers += 1
-                        print("\nCorrect!\n")
+                        slowPrint("\nCorrect!\n")
                         CONFIDENCE += 1
                     else:
-                        print("\nIncorrect!\n")
+                        slowPrint("\nIncorrect!\n")
                         CONFIDENCE -= 1
                         LUCK += 1
 
@@ -555,10 +577,10 @@ def actTwo(): #i just finished the scalpel chellenge, did some light testing, th
 
                 # If the player fails to get 3 correct answers, they still get the artifact
                 if correct_answers < 3:
-                    print(f"You have FAILED to peer review! Your CONFIDENCE is SHATTERED\n")
-                    print('CONFIDENCE updated to 1')
+                    slowPrint(f"You have FAILED to peer review! Your CONFIDENCE is SHATTERED\n")
+                    slowPrint('CONFIDENCE updated to 1')
                     CONFIDENCE = 1
-                    print('The NONSENSICAL TOME has rewired your BRAIN to be more in tune with the COSMOS!')
+                    slowPrint('The NONSENSICAL TOME has rewired your BRAIN to be more in tune with the COSMOS!')
                     setVariable('LUCK', LUCK + 10)
 
                 # Update collected artifacts
@@ -566,7 +588,7 @@ def actTwo(): #i just finished the scalpel chellenge, did some light testing, th
                 hasOmegaCaseStudy == True
             peerReviewChallenge()
         else:
-            print('PEEPA! Pick a real thing.')
+            slowPrint('PEEPA! Pick a real thing.')
             caseStudyChallenge()
         journeyChecker()
         pass
@@ -577,7 +599,7 @@ def actTwo(): #i just finished the scalpel chellenge, did some light testing, th
 def actThree():
     global hasFinalScrubTop, hasOmegaCaseStudy, hasUltimateScalpel, hasRedPager
     slowPrint('The time has come, DOCTOR BLAZE.\nYou have obtained the ULTIMATE SCALPEL...\nthe FINAL SCRUB TOP...\nand the OMEGA CASE STUDY...'
-            '\nYou make your way to MOUNT SINAI. You make your way to WIFE BRIAN, GENERAL ANESTHESIA, and YOUR DESTINY...'
+            '\nYou make your way to MOUNT SINAI. \nYou make your way to WIFE BRIAN, GENERAL ANESTHESIA, and YOUR DESTINY...'
             '\n\nOn the SUMMIT, you see your WIFE, and your ENEMY.'
             '\nWIFE BRIAN floats unconsciously above the ground, GENERAL ANESTHESIA standing over him'
             '\nThe LOVE contained within WIFE BRIAN is being SUCKED into the GENERAL, making her NIGH INVINCIBLE'
@@ -591,12 +613,61 @@ def actThree():
               '\nDOCTOR BLAZE: Oh no... WIFE, I may have doomed us all...\nFor I was BAMBOOZLED...\nTRICKED...\nand SMECKLEDORFED'
               '\nGENERAL ANESTHESIA: *confused by your choice of words* Uhh... Yeah... \nDOCTOR BLAZE!! she screams, GIVE ME THE HEMOSTATIC ORDER!!',.05)
     input('Press ENTER to CONTINUE...')
-    
-    pass
+    slowPrint('GENERAL ANESTHESIA reaches out her hands, attempting to summon the ORDER to herself')
+    slowPrint('You PULL back, causing them to float around and between the two of you')
+    slowPrint('GENERAL ANESTHESIA: DOCTOR BLAZE... you are much stronger than I had thought'
+              '\nThe ORDER is deciding who shall be its MASTER!'
+              '\nDOCTOR BLAZE: AND IT WILL BE ME!!!')
+    def finalBattle():
+        global CONFIDENCE
+        generalHealth = random.randint(int(CONFIDENCE * 1.1), int(CONFIDENCE * 1.5))
+        choices = ['SCALPEL','CASE STUDY','SCRUB TOP']
+        winMessages = {
+        ('SCALPEL', 'SCRUB TOP'): "Your SCALPEL slices the SCRUB TOP into avant-garde fashion!",
+        ('SCRUB TOP', 'CASE STUDY'): "Your SCRUB TOP blinds the CASE STUDY into submission. Disco win!",
+        ('CASE STUDY', 'SCALPEL'): "Your CASE STUDY sends the SCALPEL into an identity crisis. Genius!",
+    }
+        lossMessages = {
+        ('SCRUB TOP', 'SCALPEL'): "Her SCALPEL deflects your SCRUB TOP like a superhero cape!",
+        ('CASE STUDY', 'SCRUB TOP'): "Her SCRUB TOP buries the CASE STUDY in citations. Tragic!",
+        ('SCALPEL', 'CASE STUDY'): "Her CASE STUDY sends your SCALPEL into a footnote rescursion loop. Oof.",
+    }
+        while generalHealth > 0:
+            playerChoice = input('\nWhat will you do? (SCALPEL, CASE STUDY, or SCRUB TOP?)').strip().upper()
+            if playerChoice not in choices:
+                slowPrint('\nNot a valid choice.')
+                continue
+            luckCheck = random.random() + (LUCK / 100)
+            if luckCheck > 0.8:
+                generalChoice = choices[(choices.index(playerChoice)+ 2) % 3]
+                slowPrint('\nLUCK is on your side! The GENERAL chose poorly!')
+            elif luckCheck < 0.2:
+                generalChoice = choices[(choices.index(playerChoice)+ 1) % 3]
+                slowPrint('\nBad LUCK! She saw this coming from a mile away!')
+            else:
+                generalChoice = random.choice(choices)
+            slowPrint(f'\nThe GENERAL chooses {generalChoice}!')
+            if playerChoice == generalChoice:
+                slowPrint('You went for the same object! Both sides break into interpretive dance, \nleaving everyone extremely uncomfortable.')
+            elif (playerChoice, generalChoice) in winMessages: #win
+                slowPrint(winMessages[(playerChoice, generalChoice)])
+                generalHealth -= 1
+                if generalHealth == 5:
+                    slowPrint('\nGENERAL ANESTHESIA is starting to tire out! Keep it up DOCTOR BLAZE!!')
+                elif generalHealth <= 0:
+                    slowPrint('\nGENERAL ANESTHESIA falls to her knees! She is DEFEAT!!!')
+                    epilogue()
+            else: #lose 
+                slowPrint(lossMessages[(playerChoice, generalChoice)])
+                slowPrint('You lose CONFIDENCE!!')
+                CONFIDENCE -= 1
+                if CONFIDENCE <= 1:
+                    actThreeFailure()
+    finalBattle()
 def actOneFailure():
-    print('Unfortunately, your adventure has ended before it really got started.')
-    print('Later in the day, the world ends. You are not really sure why.')
-    print('During the apocalypse you die of dysentery.')
+    slowPrint('Unfortunately, your adventure has ended before it really got started.')
+    slowPrint('Later in the day, the world ends. You are not really sure why.')
+    slowPrint('During the apocalypse you die of dysentery.')
     exit()
 def actTwoFailure():
     slowPrint('\nYou feel your CONFIDENCE drop to NOTHING',.1)
@@ -604,7 +675,48 @@ def actTwoFailure():
     slowPrint('\nThe world ends. During the apocalypse, you die of dysentery',.1)
     slowPrint('\nYOUR STORY IS OVER',.5)
     exit()
-#prologue()
-#actOne()
-#actTwo()
-actTwoFailure()
+def actThreeFailure():
+    slowPrint('\nGENERAL ANESTHESIA stands over your broken body, the HEMOSTATIC ORDER\nswirling about her now DIVINE form.',0.1)
+    slowPrint('\nDOCTOR BLAZE! she says, You never stood a chance. The ancient artifacts, powered by so much LOVE\nhave made me INVINCIBLE!!',0.1)
+    slowPrint('\nTHE WORLD... IS MINE!!!', 0.5)
+    slowPrint('\nYou take your last look at WIFE BRIAN as the world ends.\nHe still looks great.\nBut hey, at least you know why the world is ending.\nDuring the apocalypse, you die of dysentery.',0.05)
+    slowPrint('\nYOUR STORY IS OVER',.5)
+    exit()
+def epilogue():
+    slowPrint('\nThe HEMOSTATIC ORDER comes to rest firmly on your bodice, \nits MASTER made clear'
+              '\nYou reach out your hand to DESTROY the evil GENERAL ANESTHESIA, once and for all!'
+              '\nGENERAL ANESTHESIA: *slow, weak chuckles* DOCTOR... BLAZE...\nIf you strike me down now, I shall become more powerful than you can know.'
+              '\nAnd besides, she continues, if I am gone...')
+    slowPrint('\nTHEN HOW WILL YOU FIND YOUR BROTHER?',0.5)
+    slowPrint('\nYour BROTHER... thought to be KIA during the SUTURE WARS...'
+              '\nIs it possible? Can he still be alive??'
+              '\nYou must decide how to handle GENERAL ANESTHESIA.')
+    def finalChoice():
+        choice = input(slowPrint('\nWill you DESTROY this villainous wrech once and for all?'
+                                '\nOr will you CAPTURE her to learn what she knows?')).strip().lower()
+        if choice == 'destroy':
+            slowPrint('\nThe GENERAL cackling at you. You raise your hand, and using the HEMOSTATIC ORDER,\nyou shatter GENERAL ANESTHESIA into ATOMS!\nHer cackling echoes louder, and finally dies out.')
+        elif choice == 'capture':
+            slowPrint('\nAs you approach GENERAL ANESTHESIA, she spits out one final CURSE, \nand THROWS herself over the side of MOUNT SINAI. \nYou hear evil cackling all the way down.')
+        else:
+            slowPrint('\nThere is no escaping FATE, DOCTOR BLAZE. Make your CHOICE')
+            finalChoice()
+    finalChoice()
+    slowPrint('You rush over to WIFE BRIAN, and check his vitals.'
+              '\nHe is okay! He begins to wake.'
+              '\nWIFE: DOCTOR BLAZE? What happened?? One minute I was talking about \nhow much I love you, and the next-'
+              "\nDOCTOR BLAZE: You'll have to shut up now, bless you. Everything is okay."
+              '\nGENERAL ANESTHESIA is gone, and can never hurt you again.'
+              '\nWIFE: That is good... but who the hell is GENERAL ANESTHESIA?'
+              '\nDOCTOR BLAZE: Oh WIFE BRIAN, what would I do without you?'
+              '\n*both laugh lovingly*')
+    slowPrint('And so, WIFE in hand, DOCTOR BLAZE goes home.'
+              '\nBack to their normal lives of LOVE and HAPPINESS')
+    slowPrint('AKILA! YOU MADE IT TO THE END! I AM SO PROUD OF YOU!!!'
+              'Assuming I finished this in time, happy SOL INVICTUS! I love you! :)')
+    slowPrint(f'By the way, your secret SEX APPEAL stat was {sexAppeal}.',.2)
+    exit()
+    
+        
+prologue()
+actOne()
