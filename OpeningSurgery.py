@@ -599,15 +599,12 @@ def actOneFailure():
     print('During the apocalypse you die of dysentery.')
     exit()
 def actTwoFailure():
-    slowPrint('\nYou feel your CONFIDENCE drop to NOTHING',.1
-          '\nYou sink to the ground, distraught that WIFE BRIAN is being left to the forces of EVIL',.1
-          '\nThe world ends. During the apocalypse, you die of dysentery',.1  
-          )
-    slowPrint('\nYOUR STORY IS OVER',0.5)
+    slowPrint('\nYou feel your CONFIDENCE drop to NOTHING',.1)
+    slowPrint('\nYou sink to the ground, distraught that WIFE BRIAN is being left to the forces of EVIL',.1)
+    slowPrint('\nThe world ends. During the apocalypse, you die of dysentery',.1)
+    slowPrint('\nYOUR STORY IS OVER',.5)
     exit()
-
-
 #prologue()
 #actOne()
 #actTwo()
-actThree()
+actTwoFailure()
