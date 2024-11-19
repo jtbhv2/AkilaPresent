@@ -469,8 +469,9 @@ def actTwo(): #i just finished the scalpel chellenge, did some light testing, th
             slowPrint('\nYou FIRMLY GRASP the CASE STUDY in your greasy little claws'
                   '\nKnowing the data within is not reviewed gives you the JIBBLIES. You took the EASY WAY OUT')
             setVariable('LUCK', LUCK - 5)
-            CONFIDENCE = 1
-            slowPrint('CONFIDENCE updated to 1')
+            setVariable('CONFIDENCE', CONFIDENCE - 9)
+            if CONFIDENCE <= 0:
+                actTwoFailure()
             hasOmegaCaseStudy = True
             collectedArtifacts += 1
         elif choice == 'peer':
@@ -565,7 +566,7 @@ def actTwo(): #i just finished the scalpel chellenge, did some light testing, th
                         CONFIDENCE += 1
                     else:
                         slowPrint("\nIncorrect!\n")
-                        CONFIDENCE -= 1
+                        CONFIDENCE -= random.randint(0,1)
                         LUCK += 1
 
                     # If confidence reaches 0, call actTwoFailure()
@@ -715,6 +716,11 @@ def epilogue():
     slowPrint('AKILA! YOU MADE IT TO THE END! I AM SO PROUD OF YOU!!!'
               'Assuming I finished this in time, happy SOL INVICTUS! I love you! :)')
     slowPrint(f'By the way, your secret SEX APPEAL stat was {sexAppeal}.',.2)
+    if sexAppeal == 100:
+        slowPrint('\nLooks like you need to go hunting for a little secret :)')
+    elif sexAppeal == 1000:
+        slowPrint('\nDamn bro, if you are seeing this on your first time through, my hat is off to you'
+                  '\nHere is PROOF of your shocking SEXUALNESS')
     exit()
     
         
