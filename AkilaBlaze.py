@@ -14,7 +14,7 @@ def show_splash():
     splash_root.overrideredirect(True)  # Removes the title bar
 
     # Load the image
-    splash_image_path = resource_path(r"C:\Users\brian.stlouis\Documents\AkilaPresent\AkilaGameArt.webp")
+    splash_image_path = resource_path(r"AkilaGameArt.webp")
     splash_image = Image.open(splash_image_path)
     splash_photo = ImageTk.PhotoImage(splash_image)
 
@@ -785,7 +785,7 @@ def epilogue():
     slowPrint('And so, WIFE in hand, DOCTOR BLAZE goes home.'
               '\nBack to their normal lives of LOVE and HAPPINESS'
               '\nYou cannot help but wonder... is your BROTHER really out there?'
-              '\nFind out in the SEQUEL: DOCTOR BLAZE and the ERYTHROCYTE CONSPIRACY') #Implies a plot involving rogue blood cells, but it’s just a study about the lifespan of red blood cells.
+              '\nFind out in the SEQUEL: AKILA BLAZE and the ERYTHROCYTE CONSPIRACY') #Implies a plot involving rogue blood cells, but it’s just a study about the lifespan of red blood cells.
     slowPrint('AKILA! YOU MADE IT TO THE END! I AM SO PROUD OF YOU!!!'
               'Assuming I finished this in time, happy SOL INVICTUS! I love you! :)')
     slowPrint(f'By the way, your secret SEX APPEAL stat was {sexAppeal}.',.2)
