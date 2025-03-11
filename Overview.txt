@@ -1,36 +1,38 @@
-Okay this is going to be a choose your own adventure text based type thing.
-What is the overall object of the game?
-    Defeating an enemy?
-        Only if it is not based on anything in real life
-    Rescuing someone?
-        Rescuing Brian from an enemy?
-    Finding something?
-        The Ultimate Doctor
-        The Final Scalpel
-    Why not all three? Find an object to defeat an enemy in order to rescue Brian!
-        Akila must find the Final Scalpel and the Ultimate Scrub Top to defeat {something} in order to rescue Brian
-What is the story?
-Mild mannered Akila Blaze must go on a quest to find the sacred items in order to defeat the Evil General Anesthesia before she can suck the love
-out of Brian's heart and become God King of the world
-What will be the components?
-    Choose your own adventure, for sure
-    Will it be compiled?
-        This would be ideal I think, leaves room for customization
-    Will it be on a repeating three day cycle like in a time loop?
-        That would be awesome, but maybe too much
-    Multiple endings?
-        Also yes. Buut how to implement this?
-    Save System? 
-        If akila fails or dies, how to revert?
+Overall, I want this story to involve a plot where Dr Blaze brother never died, but instead was shrunk down. 
+He has been living inside of various people and animals, recruiting red blood cells to his cause
+He does not know the suture wars have ended, and is plotting to use blood control to assassinate various generals, who have 
+now either reformed or have risen to levels of power that could be dangerous
+
+Akila Blaze - Protagonist
+Wife Brian - Damsel in distress
+Clotter Blaze/ The Hemogoblin - Antagonist and Dr Blaze's Brother
+General Anesthesia - Antagonist from the first game who terrorizes akila's memories
+
+suture Wars: Event long in the past that used SCP type medical monstrosities to do battle
+    Alot of the suture wars will be explored so i need to figure that out
+    Wife brian was on the other side but fell in love with dr blaze and defected
+    gen an also opposing side
     
-Act 1
-    Akila is working normally when they learn that Brian has been kidnapped by the Evil General Anesthesia to complete her evil plot.
-    To have any chance of defeating General Anesthesia, they must collect the Ultimate Scalpel, Final Case Study, and the Omega Scrub Top.
-    Only then will Akila stand a chance to challenge General Anesthesia atop Mt Sinai to rescue their love, Brian
-Act 2
-    Akila collects the items that they need
-    Scalpel will be some kind of combat thing
-    the case study will be a kind of mental excersize
-    and the scrub top will be a social thing to deal with patients
-Act 3
-    Akila challenges and defeats General Anesthesia
+
+prologue
+    Dream with general Anesthesia
+    normal home life with Brian
+    Brian attacks Dr Blaze and must be subdued
+act one
+    find out that people and animals all over the area are suddenly attacking various things
+    death toll is small but people all have connection to the suture wars
+    hearing whispers of the entity behind it all - the Hemogoblin
+    learn that they must track the deaths and find out what really happened all those years ago to end the war
+act two
+    act two ends with finding out that the hemogoblin is actually blaze's brother, Clotter Blaze
+act three
+epilogue
+    for the entire game, dr blaze has been harrassed by what they thought were just bad memories of gen Anesthesia
+    here we learn that it is the actual consciousness of the general, who will finally break free of 
+    dr blazes mind, weakening them in the process
+    the general escapes, alive once again. doctor blaze is out of commission, wife brian is taken captive again
+    find out more in the sequel: 
+    Akila Blaze 3: Awakening Under Anesthesia (wip)
+    Akila Blaze 3: Anesthetic Overdose
+    Akila Blaze 3: HyperSedation
+    Akila Blaze 3: The LAST (Local Anesthetic Systemic Toxicity) General

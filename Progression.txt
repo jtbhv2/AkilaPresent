@@ -1,0 +1,61 @@
+Act 1: Initial Exploration & Unlocking
+Location 1 (Start)
+
+Find Item 1, which unlocks Command 1.
+Command 1 allows access to Location 2.
+Location 2 (Early Puzzle Area)
+
+Obtain Item 2, needed for Command 2.
+Command 2 unlocks Location 3.
+Location 3 (Midpoint Block)
+
+Needs Command 3, which is unlocked using Item 2.
+Once unlocked, travel to Location 4.
+Act 2: Mid-Game Complexity & Backtracking
+Location 4 (Puzzle Area)
+
+Obtain Item 3, which enables Command 4.
+Command 4 opens Location 5.
+Also, using Item 3 in Location 3 unlocks Item 4.
+Location 5 (Resource Hub)
+
+Obtain Item 5.
+Using Command 5 (found in Location 6) unlocks Item 6 back in Location 4.
+Location 6 (Key Interaction Zone)
+
+Item 4 is required to activate Command 5, allowing access to Item 5 in Location 5.
+Once Item 5 and Item 6 are obtained, use Command 6 to open Location 8.
+Act 3: Expanding Access & Multiple Dependencies
+Location 8 (Mid-Late Challenge)
+
+Command 7 requires both Item 5 & 6 to access Location 9.
+Location 9 contains Item 7, which allows Command 8.
+Command 8 unlocks Location 10.
+Location 10 (Return & Unlock)
+
+Obtain Item 8, but it can only be retrieved after revisiting Location 3 with Command 8.
+Item 8 is required to access Location 11.
+Act 4: Final Unlocks & Endgame Challenge
+Location 11 (Final Path Setup)
+
+Command 9 is found here, which allows Location 12 to open.
+Location 12 contains Item 9, the final required key item.
+Location 13 (Endgame Barrier)
+
+Using Item 9 activates Command 10, which opens the final area.
+Final Action is performed, completing the game.
+Added Complexity & Depth
+Backtracking for Unlocks:
+
+Item 4 is only obtainable by revisiting Location 3 after Command 4.
+Item 8 requires returning to Location 3 with Command 8.
+Multiple Items Affecting Multiple Things:
+
+Item 5 & 6 are both needed for Command 7.
+Command 6 affects Location 8, but also triggers an event in Location 4 to reveal Item 6.
+Command 9 opens Location 12, but also indirectly enables obtaining Item 9.
+Hidden Actions & Alternate Paths:
+
+Optional Command X found early allows a shortcut in Location 6.
+Stat-Based Unlock: If the player has a high enough stat, Item 7 can be obtained early.
+Locked Room in Location 5 requires an item from Location 2, rewarding a special ability.

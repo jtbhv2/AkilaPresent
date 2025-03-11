@@ -1,0 +1,25 @@
+The game runs on commands, and different things will happen depending on what you type.
+There are some commands that can always be used, no matter what. These are things like
+inventory, go, use, examine, etc. 
+
+There are also some commands that can only be used in certain rooms.
+These room specific commands will always be displayed after every line you type
+
+The global ones will not be, but can still be used. HELP will list these out for you
+
+Some commands can only be used after doing certain other actions
+Example: The game may display "Commands: search, use."
+Note that you could type one of these commands, OR and of the GLOBAL commands
+After searching, you find a hidden switch.
+Now, a hidden command called flip switch will appear in your list of commands and can now be called.
+
+Some SUPER SECRET commands might never be displayed, but can still be used
+These will be rare, and will never be required to finish the game
+
+
+NOTE:
+'go' will require a location to be typed after it. "go home"
+but, it will only ever be displayed as 'go'
+
+'use' and 'toss' work exactly the same way, but you can only use/toss items that you have in your inventory'
+ie 'use ultimate scalpel'
